@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="stu,">
+  <meta name="keywords" content="动态规划,">
 
 
 
@@ -77,18 +77,18 @@
 
 
 
-<meta name="description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
-<meta name="keywords" content="stu">
+<meta name="description" content="N个整数组成的序列a[1],a[2],a[3],…,a[n]，求该序列如a[i]+a[i+1]+…+a[j]的连续子段和的最大值。当所给的整数均为负数时和为0。例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。输入第1行：整数序列的长度N（2 &amp;lt;= N &amp;lt;= 50000)第2 - N + 1行：N个整数（-10^9 &amp;lt;= A[i] &amp;lt;=">
+<meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fff">
-<meta property="og:url" content="http://www.gtygo.com/2019/01/26/fff/index.html">
+<meta property="og:title" content="51nod 1049 最大子段和">
+<meta property="og:url" content="http://www.gtygo.com/2017/12/23/1049 最大子段和/index.html">
 <meta property="og:site_name" content="gtygo">
-<meta property="og:description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
+<meta property="og:description" content="N个整数组成的序列a[1],a[2],a[3],…,a[n]，求该序列如a[i]+a[i+1]+…+a[j]的连续子段和的最大值。当所给的整数均为负数时和为0。例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。输入第1行：整数序列的长度N（2 &amp;lt;= N &amp;lt;= 50000)第2 - N + 1行：N个整数（-10^9 &amp;lt;= A[i] &amp;lt;=">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-26T11:13:45.188Z">
+<meta property="og:updated_time" content="2019-02-14T03:23:00.034Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fff">
-<meta name="twitter:description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
+<meta name="twitter:title" content="51nod 1049 最大子段和">
+<meta name="twitter:description" content="N个整数组成的序列a[1],a[2],a[3],…,a[n]，求该序列如a[i]+a[i+1]+…+a[j]的连续子段和的最大值。当所给的整数均为负数时和为0。例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。输入第1行：整数序列的长度N（2 &amp;lt;= N &amp;lt;= 50000)第2 - N + 1行：N个整数（-10^9 &amp;lt;= A[i] &amp;lt;=">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://www.gtygo.com/2019/01/26/fff/">
+  <link rel="canonical" href="http://www.gtygo.com/2017/12/23/1049 最大子段和/">
 
 
 
 
 
-  <title>fff | gtygo</title>
+  <title>51nod 1049 最大子段和 | gtygo</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/01/26/fff/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2017/12/23/1049 最大子段和/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">fff</h1>
+          <h1 class="post-title" itemprop="name headline">51nod 1049 最大子段和</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-26T19:11:16+08:00">
-                2019-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T19:11:16+08:00">
+                2017-12-23
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/stu/" itemprop="url" rel="index">
-                    <span itemprop="name">stu</span>
+                  <a href="/categories/51nod题解/" itemprop="url" rel="index">
+                    <span itemprop="name">51nod题解</span>
                   </a>
                 </span>
 
@@ -340,17 +340,8 @@
       
 
       
-        <p>#标题一</p>
-<p>##标题二</p>
-<p>###标题三</p>
-<p><strong>加粗</strong><br><em>斜线</em></p>
-<p><del>横线</del></p>
-<p><code>代码</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码块</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>引用</p>
-</blockquote>
-
+        <p>N个整数组成的序列a[1],a[2],a[3],…,a[n]，求该序列如a[i]+a[i+1]+…+a[j]的连续子段和的最大值。当所给的整数均为负数时和为0。<br>例如：-2,11,-4,13,-5,-2，和最大的子段为：11,-4,13。和为20。<br>输入<br>第1行：整数序列的长度N（2 &lt;= N &lt;= 50000)<br>第2 - N + 1行：N个整数（-10^9 &lt;= A[i] &lt;= 10^9）<br>输出<br>输出最大子段和。<br>输入样例<br>6<br>-2<br>11<br>-4<br>13<br>-5<br>-2<br>输出样例<br>20</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String []args) &#123;</span><br><span class="line">		Scanner in = new Scanner(System.in);</span><br><span class="line">		int n = in.nextInt();</span><br><span class="line">		int max = Integer.MIN_VALUE;</span><br><span class="line">		int min = Integer.MAX_VALUE;</span><br><span class="line">		int a;</span><br><span class="line">		int sum[] = new int[n + 1];</span><br><span class="line">		for (int i = 1; i &lt;= n; i++) &#123;</span><br><span class="line">			a = in.nextInt();</span><br><span class="line">			sum[i] = sum[i - 1] + a;</span><br><span class="line">		&#125;</span><br><span class="line">		for (int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			if(max&lt;sum[i])&#123;</span><br><span class="line">				max=sum[i];</span><br><span class="line">			&#125;</span><br><span class="line">			if(min&gt;sum[i]) &#123;</span><br><span class="line">				min = sum[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	/*	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			System.out.println(sum[i]);</span><br><span class="line">		&#125;*/</span><br><span class="line">		</span><br><span class="line">		if((max-min)&lt;0)&#123;</span><br><span class="line">			System.out.print(&quot;0&quot;);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			if(min&lt;0) &#123;</span><br><span class="line">				System.out.print(max - min);</span><br><span class="line">			&#125;else&#123;</span><br><span class="line">				System.out.print(max);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -367,7 +358,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/stu/" rel="tag"># stu</a>
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
           
         </div>
       
@@ -380,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/26/hello/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/12/23/1085 背包问题/" rel="next" title="51nod 1085 背包问题">
+                <i class="fa fa-chevron-left"></i> 51nod 1085 背包问题
               </a>
             
           </div>
@@ -389,6 +380,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/23/1002 数塔取数问题/" rel="prev" title="51nod 1002 数塔取数问题">
+                51nod 1002 数塔取数问题 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

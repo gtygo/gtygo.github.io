@@ -66,7 +66,7 @@
 
 
 
-  <meta name="keywords" content="stu,">
+  <meta name="keywords" content="动态规划,">
 
 
 
@@ -77,18 +77,18 @@
 
 
 
-<meta name="description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
-<meta name="keywords" content="stu">
+<meta name="description" content="在N件物品取出若干件放在容量为W的背包里，每件物品的体积为W1，W2……Wn（Wi为整数），与之相对应的价值为P1,P2……Pn（Pi为整数）。求背包能够容纳的最大价值。输入第1行，2个整数，N和W中间用空格隔开。N为物品的数量，W为背包的容量。(1 &amp;lt;= N &amp;lt;= 100，1 &amp;lt;= W &amp;lt;= 10000)第2 - N + 1行，每行2个整数，Wi和Pi，分别是物品的体积和">
+<meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fff">
-<meta property="og:url" content="http://www.gtygo.com/2019/01/26/fff/index.html">
+<meta property="og:title" content="51nod 1085 背包问题">
+<meta property="og:url" content="http://www.gtygo.com/2017/12/23/1085 背包问题/index.html">
 <meta property="og:site_name" content="gtygo">
-<meta property="og:description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
+<meta property="og:description" content="在N件物品取出若干件放在容量为W的背包里，每件物品的体积为W1，W2……Wn（Wi为整数），与之相对应的价值为P1,P2……Pn（Pi为整数）。求背包能够容纳的最大价值。输入第1行，2个整数，N和W中间用空格隔开。N为物品的数量，W为背包的容量。(1 &amp;lt;= N &amp;lt;= 100，1 &amp;lt;= W &amp;lt;= 10000)第2 - N + 1行，每行2个整数，Wi和Pi，分别是物品的体积和">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-26T11:13:45.188Z">
+<meta property="og:updated_time" content="2019-02-14T03:21:44.144Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="fff">
-<meta name="twitter:description" content="#标题一 ##标题二 ###标题三 加粗斜线 横线 代码 1代码块  引用">
+<meta name="twitter:title" content="51nod 1085 背包问题">
+<meta name="twitter:description" content="在N件物品取出若干件放在容量为W的背包里，每件物品的体积为W1，W2……Wn（Wi为整数），与之相对应的价值为P1,P2……Pn（Pi为整数）。求背包能够容纳的最大价值。输入第1行，2个整数，N和W中间用空格隔开。N为物品的数量，W为背包的容量。(1 &amp;lt;= N &amp;lt;= 100，1 &amp;lt;= W &amp;lt;= 10000)第2 - N + 1行，每行2个整数，Wi和Pi，分别是物品的体积和">
 
 
 
@@ -118,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://www.gtygo.com/2019/01/26/fff/">
+  <link rel="canonical" href="http://www.gtygo.com/2017/12/23/1085 背包问题/">
 
 
 
 
 
-  <title>fff | gtygo</title>
+  <title>51nod 1085 背包问题 | gtygo</title>
   
 
 
@@ -251,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/01/26/fff/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2017/12/23/1085 背包问题/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -268,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">fff</h1>
+          <h1 class="post-title" itemprop="name headline">51nod 1085 背包问题</h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-26T19:11:16+08:00">
-                2019-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T19:11:16+08:00">
+                2017-12-23
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/stu/" itemprop="url" rel="index">
-                    <span itemprop="name">stu</span>
+                  <a href="/categories/51nod题解/" itemprop="url" rel="index">
+                    <span itemprop="name">51nod题解</span>
                   </a>
                 </span>
 
@@ -340,17 +340,8 @@
       
 
       
-        <p>#标题一</p>
-<p>##标题二</p>
-<p>###标题三</p>
-<p><strong>加粗</strong><br><em>斜线</em></p>
-<p><del>横线</del></p>
-<p><code>代码</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">代码块</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>引用</p>
-</blockquote>
-
+        <p>在N件物品取出若干件放在容量为W的背包里，每件物品的体积为W1，W2……Wn（Wi为整数），与之相对应的价值为P1,P2……Pn（Pi为整数）。求背包能够容纳的最大价值。<br>输入<br>第1行，2个整数，N和W中间用空格隔开。N为物品的数量，W为背包的容量。(1 &lt;= N &lt;= 100，1 &lt;= W &lt;= 10000)<br>第2 - N + 1行，每行2个整数，Wi和Pi，分别是物品的体积和物品的价值。(1 &lt;= Wi, Pi &lt;= 10000)<br>输出<br>输出可以容纳的最大价值。<br>输入样例<br>3 6<br>2 5<br>3 8<br>4 9<br>输出样例<br>14</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line">import java.util.*;</span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Main</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	public static class InputReader&#123;</span><br><span class="line">		BufferedReader buf; StringTokenizer tok;</span><br><span class="line">		InputReader()&#123;</span><br><span class="line">			buf=new BufferedReader(new InputStreamReader(System.in));</span><br><span class="line">		&#125;</span><br><span class="line">		boolean hasNext()&#123;</span><br><span class="line">			while(tok==null||!tok.hasMoreElements())&#123;</span><br><span class="line">				try&#123;</span><br><span class="line">					tok=new StringTokenizer(buf.readLine());</span><br><span class="line">				&#125; catch (Exception e) &#123;</span><br><span class="line">					return false;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			return true;</span><br><span class="line">		&#125;</span><br><span class="line">		String next()&#123;</span><br><span class="line">			if( hasNext())</span><br><span class="line">				return tok.nextToken();</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int nextInt()&#123;</span><br><span class="line">			return Integer.parseInt(next());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static void main(String []args)&#123;</span><br><span class="line">		InputReader in=new InputReader();</span><br><span class="line">		int N=in.nextInt(); int W=in.nextInt();</span><br><span class="line">		int w[]=new int[N+2];</span><br><span class="line">		int p[]=new int[N+2];</span><br><span class="line">		int dp[][]=new int[N+2][W+2];</span><br><span class="line">		int f[]=new int[W+2];</span><br><span class="line">		//N=in.nextInt(); W=in.nextInt();</span><br><span class="line">		for(int i=1;i&lt;=N;i++)&#123;</span><br><span class="line">			w[i]=in.nextInt();</span><br><span class="line">			p[i]=in.nextInt();</span><br><span class="line">		&#125;</span><br><span class="line">		//System.out.println(N+&quot; &quot;+W);</span><br><span class="line">		for(int i=1;i&lt;=N;i++)&#123;</span><br><span class="line">			for(int j=W;j&gt;=w[i];j--)&#123;</span><br><span class="line">				f[j]=Math.max(f[j],f[j-w[i]]+p[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(f[W]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -367,7 +358,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/stu/" rel="tag"># stu</a>
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
           
         </div>
       
@@ -380,8 +371,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/26/hello/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/12/23/1118 机器人走方格/" rel="next" title="51nod 1118 机器人走方格">
+                <i class="fa fa-chevron-left"></i> 51nod 1118 机器人走方格
               </a>
             
           </div>
@@ -389,6 +380,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/23/1049 最大子段和/" rel="prev" title="51nod 1049 最大子段和">
+                51nod 1049 最大子段和 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
