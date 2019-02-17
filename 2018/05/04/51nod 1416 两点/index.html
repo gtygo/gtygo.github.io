@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="搜索,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="福克斯在玩一款手机解迷游戏，这个游戏叫做”两点”。基础级别的时候是在一个n×m单元上玩的。像这样：  每一个单元有包含一个有色点。我们将用不同的大写字母来表示不同的颜色。 这个游戏的关键是要找出一个包含同一颜色的环。看上图中4个蓝点，形成了一个环。一般的，我们将一个序列 d1,d2,…,dk 看成一个环，当且仅当它符合下列条件时：  这k个点不一样，即当 i≠j时， di 和 dj不同。  k至少">
+<meta name="keywords" content="搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="51nod 1416 两点">
+<meta property="og:url" content="http://www.gtygo.com/2018/05/04/51nod 1416 两点/index.html">
+<meta property="og:site_name" content="gtygo">
+<meta property="og:description" content="福克斯在玩一款手机解迷游戏，这个游戏叫做”两点”。基础级别的时候是在一个n×m单元上玩的。像这样：  每一个单元有包含一个有色点。我们将用不同的大写字母来表示不同的颜色。 这个游戏的关键是要找出一个包含同一颜色的环。看上图中4个蓝点，形成了一个环。一般的，我们将一个序列 d1,d2,…,dk 看成一个环，当且仅当它符合下列条件时：  这k个点不一样，即当 i≠j时， di 和 dj不同。  k至少">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.51nod.com/upload/000FBEBD/08D26811337C62460000000000000003.jpeg">
+<meta property="og:updated_time" content="2019-02-17T03:18:28.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="51nod 1416 两点">
+<meta name="twitter:description" content="福克斯在玩一款手机解迷游戏，这个游戏叫做”两点”。基础级别的时候是在一个n×m单元上玩的。像这样：  每一个单元有包含一个有色点。我们将用不同的大写字母来表示不同的颜色。 这个游戏的关键是要找出一个包含同一颜色的环。看上图中4个蓝点，形成了一个环。一般的，我们将一个序列 d1,d2,…,dk 看成一个环，当且仅当它符合下列条件时：  这k个点不一样，即当 i≠j时， di 和 dj不同。  k至少">
+<meta name="twitter:image" content="http://img.51nod.com/upload/000FBEBD/08D26811337C62460000000000000003.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.gtygo.com/2018/05/04/51nod 1416 两点/">
+
+
+
+
+
+  <title>51nod 1416 两点 | gtygo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">gtygo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2018/05/04/51nod 1416 两点/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gtygo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">51nod 1416 两点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-04T19:11:16+08:00">
+                2018-05-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/51nod题解/" itemprop="url" rel="index">
+                    <span itemprop="name">51nod题解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>福克斯在玩一款手机解迷游戏，这个游戏叫做”两点”。基础级别的时候是在一个n×m单元上玩的。像这样：</p>
+<p><img src="http://img.51nod.com/upload/000FBEBD/08D26811337C62460000000000000003.jpeg" alt="avatar"></p>
+<p>每一个单元有包含一个有色点。我们将用不同的大写字母来表示不同的颜色。</p>
+<p>这个游戏的关键是要找出一个包含同一颜色的环。看上图中4个蓝点，形成了一个环。一般的，我们将一个序列 d1,d2,…,dk 看成一个环，当且仅当它符合下列条件时：</p>
+<ol>
+<li><p>这k个点不一样，即当 i≠j时， di 和 dj不同。</p>
+</li>
+<li><p>k至少是4。</p>
+</li>
+<li><p>所有的点是同一种颜色。</p>
+</li>
+<li><p>对于所有的 1≤i≤k-1: di 和 di+1 是相邻的。还有 dk 和 d1 也应该相邻。单元 x 和单元 y 是相邻的当且仅当他们有公共边。</p>
+</li>
+</ol>
+<p>当给出一幅格点时，请确定里面是否有环。</p>
+<p>输入<br>单组测试数据。<br>第一行包含两个整数n和m (2≤n,m≤50):板子的行和列。<br>接下来n行，每行包含一个有m个字母的串，表示当前行每一个点的颜色。每一个字母都是大写字母。<br>输出<br>如果有环输出Yes，否则输出No。<br>输入样例<br>3 4<br>AAAA<br>ABCA<br>AAAA<br>3 4<br>AAAA<br>ABCA<br>AADA<br>输出样例<br>Yes<br>No</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	static int mark[][]=new int[111][111];</span><br><span class="line">	static char map[][]=new char[111][111];</span><br><span class="line">	static int dx[]=&#123;0,1,0,-1&#125;;</span><br><span class="line">	static int dy[]=&#123;1,0,-1,0&#125;;</span><br><span class="line">	static int n,m;</span><br><span class="line">	static int ok;</span><br><span class="line">	static boolean check(int x,int y)&#123;</span><br><span class="line">		if(x&lt;0||y&lt;0||x&gt;=n||y&gt;=m)</span><br><span class="line">			return true;</span><br><span class="line">		return false;</span><br><span class="line">	&#125;</span><br><span class="line">	static void dfs(int x,int y,int start,int end,char ch,int sum)&#123;</span><br><span class="line">		if(   (((x-1==start)&amp;&amp;(y==end))||((x==start)&amp;&amp;(y+1==end)))&amp;&amp;sum&gt;=3)&#123;</span><br><span class="line">			ok=1;</span><br><span class="line">			return ;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=0;i&lt;4;i++)&#123;</span><br><span class="line">			if(ok==1)</span><br><span class="line">				return ;</span><br><span class="line">			int tx=x+dx[i];</span><br><span class="line">			int ty=y+dy[i];</span><br><span class="line">			if(check(tx,ty)||map[tx][ty]!=ch||mark[tx][ty]==1)&#123;</span><br><span class="line">				continue;</span><br><span class="line">			&#125;</span><br><span class="line">			mark[tx][ty]=1;</span><br><span class="line">			dfs(tx,ty,start,end,ch,sum+1);</span><br><span class="line">			mark[tx][ty]=0;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	public static void main(String []args)&#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		n=in.nextInt(); m=in.nextInt();</span><br><span class="line">		ok=0;</span><br><span class="line">		for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">			map[i]=in.next().toCharArray();</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=0;i&lt;n&amp;&amp;ok!=1;i++)&#123;</span><br><span class="line">			for(int j=0;j&lt;m&amp;&amp;ok!=1;j++)&#123;</span><br><span class="line">				mark[i][j]=1;</span><br><span class="line">				dfs(i,j,i,j,map[i][j],0);</span><br><span class="line">				mark[i][j]=0;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(ok==1)</span><br><span class="line">			System.out.println(&quot;Yes&quot;);</span><br><span class="line">		else</span><br><span class="line">			System.out.println(&quot;No&quot;);</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/搜索/" rel="tag"># 搜索</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/04/51nod 1396 还是01串/" rel="next" title="51nod 1396 还是01串">
+                <i class="fa fa-chevron-left"></i> 51nod 1396 还是01串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/04/51nod 1393 0和1相等串/" rel="prev" title="51nod 1267 4个数和为0">
+                51nod 1267 4个数和为0 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+  <span class="">Email: gtydoit@gmail.com|</span>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
