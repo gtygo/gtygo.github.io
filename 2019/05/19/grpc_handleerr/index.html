@@ -85,7 +85,7 @@
 
 
 
-  <meta name="keywords" content="动态规划,">
+  <meta name="keywords" content="gRPC,">
 
 
 
@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="编辑距离，又称Levenshtein距离（也叫做Edit Distance），是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。例如将kitten一字转成sitting：sitten （k-&amp;gt;s）sittin （e-&amp;gt;i）sitting （-&amp;gt;g）所以kitten和sitting的编辑距离是3。俄罗">
-<meta name="keywords" content="动态规划">
+<meta name="description" content="错误处理此页面描述了gRPC如何处理错误，包括gRPC的内置错误代码。 可以在此处找到不同语言的示例代码。 错误模型正如您在我们的概念文档和示例中所看到的，当gRPC调用成功完成时，服务器会向客户端返回OK状态（取决于语言，OK状态可能会或可能不会直接在您的代码中使用）。 但如果通话不成功会怎样？ 如果发生错误，gRPC会返回其错误状态代码之一，并带有可选的字符串错误消息，该消息提供有关所发生情况">
+<meta name="keywords" content="gRPC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="51nod 1183 编辑距离">
-<meta property="og:url" content="http://www.gtygo.com/2017/12/23/1183 编辑距离/index.html">
+<meta property="og:title" content="gRPC中文指南（四）-错误处理和调试">
+<meta property="og:url" content="http://www.gtygo.com/2019/05/19/grpc_handleerr/index.html">
 <meta property="og:site_name" content="gtygo">
-<meta property="og:description" content="编辑距离，又称Levenshtein距离（也叫做Edit Distance），是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。例如将kitten一字转成sitting：sitten （k-&amp;gt;s）sittin （e-&amp;gt;i）sitting （-&amp;gt;g）所以kitten和sitting的编辑距离是3。俄罗">
+<meta property="og:description" content="错误处理此页面描述了gRPC如何处理错误，包括gRPC的内置错误代码。 可以在此处找到不同语言的示例代码。 错误模型正如您在我们的概念文档和示例中所看到的，当gRPC调用成功完成时，服务器会向客户端返回OK状态（取决于语言，OK状态可能会或可能不会直接在您的代码中使用）。 但如果通话不成功会怎样？ 如果发生错误，gRPC会返回其错误状态代码之一，并带有可选的字符串错误消息，该消息提供有关所发生情况">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T03:18:18.278Z">
+<meta property="og:updated_time" content="2019-05-19T11:22:14.052Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="51nod 1183 编辑距离">
-<meta name="twitter:description" content="编辑距离，又称Levenshtein距离（也叫做Edit Distance），是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。例如将kitten一字转成sitting：sitten （k-&amp;gt;s）sittin （e-&amp;gt;i）sitting （-&amp;gt;g）所以kitten和sitting的编辑距离是3。俄罗">
+<meta name="twitter:title" content="gRPC中文指南（四）-错误处理和调试">
+<meta name="twitter:description" content="错误处理此页面描述了gRPC如何处理错误，包括gRPC的内置错误代码。 可以在此处找到不同语言的示例代码。 错误模型正如您在我们的概念文档和示例中所看到的，当gRPC调用成功完成时，服务器会向客户端返回OK状态（取决于语言，OK状态可能会或可能不会直接在您的代码中使用）。 但如果通话不成功会怎样？ 如果发生错误，gRPC会返回其错误状态代码之一，并带有可选的字符串错误消息，该消息提供有关所发生情况">
 
 
 
@@ -137,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.gtygo.com/2017/12/23/1183 编辑距离/">
+  <link rel="canonical" href="http://www.gtygo.com/2019/05/19/grpc_handleerr/">
 
 
 
 
 
-  <title>51nod 1183 编辑距离 | gtygo</title>
+  <title>gRPC中文指南（四）-错误处理和调试 | gtygo</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2017/12/23/1183 编辑距离/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/05/19/grpc_handleerr/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">51nod 1183 编辑距离</h1>
+          <h1 class="post-title" itemprop="name headline">gRPC中文指南（四）-错误处理和调试</h1>
         
 
         <div class="post-meta">
@@ -299,8 +299,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T19:11:16+08:00">
-                2017-12-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-19T13:09:16+08:00">
+                2019-05-19
               </time>
             
 
@@ -322,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/51nod题解/" itemprop="url" rel="index">
-                    <span itemprop="name">51nod题解</span>
+                  <a href="/categories/gRPC中文指南（原版翻译）/" itemprop="url" rel="index">
+                    <span itemprop="name">gRPC中文指南（原版翻译）</span>
                   </a>
                 </span>
 
@@ -359,8 +359,105 @@
       
 
       
-        <p>编辑距离，又称Levenshtein距离（也叫做Edit Distance），是指两个字串之间，由一个转成另一个所需的最少编辑操作次数。许可的编辑操作包括将一个字符替换成另一个字符，插入一个字符，删除一个字符。<br>例如将kitten一字转成sitting：<br>sitten （k-&gt;s）<br>sittin （e-&gt;i）<br>sitting （-&gt;g）<br>所以kitten和sitting的编辑距离是3。俄罗斯科学家Vladimir Levenshtein在1965年提出这个概念。<br>给出两个字符串a,b，求a和b的编辑距离。<br>输入<br>第1行：字符串a(a的长度 &lt;= 1000)。<br>第2行：字符串b(b的长度 &lt;= 1000)。<br>输出<br>输出a和b的编辑距离<br>输入样例<br>kitten<br>sitting<br>输出样例<br>3</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	</span><br><span class="line">	/*</span><br><span class="line">		状态转移方程：</span><br><span class="line">		</span><br><span class="line">	 */</span><br><span class="line">	</span><br><span class="line">	public static void main(String []args)&#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		StringBuffer a=new StringBuffer(&quot;0&quot;);</span><br><span class="line">		StringBuffer b=new StringBuffer(&quot;0&quot;);</span><br><span class="line">		a.append(in.next());   b.append(in.next());</span><br><span class="line">		int n=a.length()-1; int m=b.length()-1;</span><br><span class="line">		int dp[][]=new int[n+m][n+m];</span><br><span class="line">		for(int i=1;i&lt;n+m;i++)&#123;</span><br><span class="line">			dp[i][0]=dp[0][i]=i;</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			for(int j=1;j&lt;=m;j++)&#123;</span><br><span class="line">				if(a.charAt(i)==b.charAt(j))&#123;</span><br><span class="line">					dp[i][j]=Math.min(dp[i-1][j-1],Math.min(dp[i-1][j]+1,dp[i][j-1]+1));</span><br><span class="line">				&#125;else&#123;</span><br><span class="line">					dp[i][j]=Math.min(dp[i-1][j-1]+1,Math.min(dp[i-1][j]+1,dp[i][j-1]+1));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	/*	for(int i=1;i&lt;=n;i++) &#123;</span><br><span class="line">			for (int j = 1; j &lt;= m; j++) &#123;</span><br><span class="line">				System.out.print(dp[i][j]+&quot; &quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;*/</span><br><span class="line">		</span><br><span class="line">		System.out.print(dp[n][m]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h1><p>此页面描述了gRPC如何处理错误，包括gRPC的内置错误代码。 可以在此处找到不同语言的示例代码。</p>
+<h1 id="错误模型"><a href="#错误模型" class="headerlink" title="错误模型"></a>错误模型</h1><p>正如您在我们的概念文档和示例中所看到的，当gRPC调用成功完成时，服务器会向客户端返回OK状态（取决于语言，OK状态可能会或可能不会直接在您的代码中使用）。 但如果通话不成功会怎样？</p>
+<p>如果发生错误，gRPC会返回其错误状态代码之一，并带有可选的字符串错误消息，该消息提供有关所发生情况的更多详细信息。 所有支持的语言中的gRPC客户端都可以使用错误信息。</p>
+<h1 id="错误状态代码"><a href="#错误状态代码" class="headerlink" title="错误状态代码"></a>错误状态代码</h1><p>gRPC在各种情况下引发错误，从网络故障到未经认证的连接，每个连接都与特定的状态代码相关联。 所有gRPC语言都支持以下错误状态代码。</p>
+<h2 id="一般错误"><a href="#一般错误" class="headerlink" title="一般错误"></a>一般错误</h2><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>状态代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>客户端应用程序取消了请求</td>
+<td>GRPC_STATUS_CANCELLED</td>
+</tr>
+<tr>
+<td>截止日期在服务器返回状态之前到期</td>
+<td>GRPC_STATUS_DEADLINE_EXCEEDED</td>
+</tr>
+<tr>
+<td>在服务器上找不到的方法</td>
+<td>GRPC_STATUS_UNIMPLEMENTED</td>
+</tr>
+<tr>
+<td>服务器关闭</td>
+<td>GRPC_STATUS_UNAVAILABLE</td>
+</tr>
+<tr>
+<td>服务器抛出异常（或者做了除了返回状态代码以终止RPC之外的其他操作）</td>
+<td>GRPC_STATUS_UNKNOWN</td>
+</tr>
+</tbody>
+</table>
+<h2 id="网络故障"><a href="#网络故障" class="headerlink" title="网络故障"></a>网络故障</h2><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>状态代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>在截止日期到期之前没有传输数据。 也适用于在截止日期到期之前传输某些数据且未检测到其他故障的情况</td>
+<td>GRPC_STATUS_DEADLINE_EXCEEDED</td>
+</tr>
+<tr>
+<td>在连接中断之前传输了一些数据（例如，请求元数据已写入TCP连接）</td>
+<td>GRPC_STATUS_UNAVAILABLE</td>
+</tr>
+</tbody>
+</table>
+<h2 id="协议错误"><a href="#协议错误" class="headerlink" title="协议错误"></a>协议错误</h2><table>
+<thead>
+<tr>
+<th>情况</th>
+<th>状态代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无法解压缩但支持压缩算法</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+<tr>
+<td>客户端使用的压缩机制不受服务器支持</td>
+<td>GRPC_STATUS_UNIMPLEMENTED</td>
+</tr>
+<tr>
+<td>达到流量控制资源限制</td>
+<td>GRPC_STATUS_RESOURCE_EXHAUSTED</td>
+</tr>
+<tr>
+<td>流量控制协议违规</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+<tr>
+<td>解析返回状态时出错</td>
+<td>GRPC_STATUS_UNKNOWN</td>
+</tr>
+<tr>
+<td>未经身份验证：凭据无法获取元数据</td>
+<td>GRPC_STATUS_UNAUTHENTICATED</td>
+</tr>
+<tr>
+<td>权限元数据中的主机集无效</td>
+<td>GRPC_STATUS_UNAUTHENTICATED</td>
+</tr>
+<tr>
+<td>解析响应协议缓冲区时出错</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+<tr>
+<td>解析请求协议缓冲区时出错</td>
+<td>GRPC_STATUS_INTERNAL</td>
+</tr>
+</tbody>
+</table>
+
       
     </div>
     
@@ -377,7 +474,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/gRPC/" rel="tag"># gRPC</a>
           
         </div>
       
@@ -390,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/23/1118 机器人走方格/" rel="next" title="51nod 1118 机器人走方格">
-                <i class="fa fa-chevron-left"></i> 51nod 1118 机器人走方格
+              <a href="/2019/05/18/gRPC_Concepts/" rel="next" title="gRPC中文指南（二）-gRPC概念">
+                <i class="fa fa-chevron-left"></i> gRPC中文指南（二）-gRPC概念
               </a>
             
           </div>
@@ -399,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/12/23/1002 数塔取数问题/" rel="prev" title="51nod 1002 数塔取数问题">
-                51nod 1002 数塔取数问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -454,8 +547,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -515,6 +617,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#错误处理"><span class="nav-number">1.</span> <span class="nav-text">错误处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误模型"><span class="nav-number">2.</span> <span class="nav-text">错误模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误状态代码"><span class="nav-number">3.</span> <span class="nav-text">错误状态代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般错误"><span class="nav-number">3.1.</span> <span class="nav-text">一般错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络故障"><span class="nav-number">3.2.</span> <span class="nav-text">网络故障</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协议错误"><span class="nav-number">3.3.</span> <span class="nav-text">协议错误</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
