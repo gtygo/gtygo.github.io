@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="gRPC,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文档介绍了一些关键的GRPC概念，概述了GRPC的体系结构和RPC生命周期。它假设您已阅读什么是gRPC？ 有关特定语言的详细信息，请参阅所选语言的快速入门，教程和参考文档。 概览定义服务和许多RPC系统一样，gRPC基于定义服务的思想，指定可以使用其参数和返回类型远程调用的方法。 默认情况下，gRPC使用协议缓冲区作为接口定义语言（IDL）来描述服务接口和有效负载消息的结构。 如果需要，可以使">
+<meta name="keywords" content="gRPC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gRPC中文指南（二）-gRPC概念">
+<meta property="og:url" content="http://www.gtygo.com/2019/05/18/gRPC_Concepts/index.html">
+<meta property="og:site_name" content="gtygo">
+<meta property="og:description" content="本文档介绍了一些关键的GRPC概念，概述了GRPC的体系结构和RPC生命周期。它假设您已阅读什么是gRPC？ 有关特定语言的详细信息，请参阅所选语言的快速入门，教程和参考文档。 概览定义服务和许多RPC系统一样，gRPC基于定义服务的思想，指定可以使用其参数和返回类型远程调用的方法。 默认情况下，gRPC使用协议缓冲区作为接口定义语言（IDL）来描述服务接口和有效负载消息的结构。 如果需要，可以使">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-19T06:47:32.024Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gRPC中文指南（二）-gRPC概念">
+<meta name="twitter:description" content="本文档介绍了一些关键的GRPC概念，概述了GRPC的体系结构和RPC生命周期。它假设您已阅读什么是gRPC？ 有关特定语言的详细信息，请参阅所选语言的快速入门，教程和参考文档。 概览定义服务和许多RPC系统一样，gRPC基于定义服务的思想，指定可以使用其参数和返回类型远程调用的方法。 默认情况下，gRPC使用协议缓冲区作为接口定义语言（IDL）来描述服务接口和有效负载消息的结构。 如果需要，可以使">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.gtygo.com/2019/05/18/gRPC_Concepts/">
+
+
+
+
+
+  <title>gRPC中文指南（二）-gRPC概念 | gtygo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">gtygo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/05/18/gRPC_Concepts/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gtygo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">gRPC中文指南（二）-gRPC概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T16:19:16+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/gRPC中文指南（原版翻译）/" itemprop="url" rel="index">
+                    <span itemprop="name">gRPC中文指南（原版翻译）</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文档介绍了一些关键的GRPC概念，概述了GRPC的体系结构和RPC生命周期。<br>它假设您已阅读什么是gRPC？ 有关特定语言的详细信息，请参阅所选语言的快速入门，教程和参考文档。</p>
+<h1 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h1><h2 id="定义服务"><a href="#定义服务" class="headerlink" title="定义服务"></a>定义服务</h2><p>和许多RPC系统一样，gRPC基于定义服务的思想，指定可以使用其参数和返回类型远程调用的方法。 默认情况下，gRPC使用协议缓冲区作为接口定义语言（IDL）来描述服务接口和有效负载消息的结构。 如果需要，可以使用其他替代方案。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">service HelloService &#123;</span><br><span class="line">  rpc SayHello (HelloRequest) returns (HelloResponse);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message HelloRequest &#123;</span><br><span class="line">  string greeting = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">message HelloResponse &#123;</span><br><span class="line">  string reply = 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>gRPC允许您定义四种服务方法：</p>
+<ul>
+<li><p>一元RPC，客户端向服务器发送单个请求并返回单个响应，就像正常的函数调用一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpc SayHello(HelloRequest) returns (HelloResponse)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务器流式RPC，客户端向服务器发送请求并获取流以读取消息序列。 客户端从返回的流中读取，直到没有更多消息。 gRPC保证单个RPC调用中的消息排序。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>客户端流式RPC，客户端再次使用提供的流写入一系列消息并将其发送到服务器。 一旦客户端写完消息，它就等待服务器读取它们并返回它的响应。 gRPC再次保证在单个RPC调用中的消息排序。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>双向流式RPC，双方使用读写流发送一系列消息。 这两个流独立运行，因此客户端和服务器可以按照自己喜欢的顺序进行读写：例如，服务器可以在写入响应之前等待接收所有客户端消息，或者它可以交替地读取消息然后写入消息， 或者其他一些读写组合。 保留每个流中的消息顺序。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpc BidiHello(stream HelloRequest) returns (stream HelloResponse)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们将在下面的RPC生命周期部分中更详细地介绍不同类型的RPC。</p>
+<h2 id="使用API接口"><a href="#使用API接口" class="headerlink" title="使用API接口"></a>使用API接口</h2><p>从.proto文件中的服务定义开始，gRPC提供了生成客户端和服务器端代码的协议缓冲编译器插件。 gRPC用户通常在客户端调用这些API，并在服务器端实现相应的API。</p>
+<ul>
+<li>在服务器端，服务器实现服务声明的方法，并运行gRPC服务器来处理客户端调用。 gRPC基础结构解码传入请求，执行服务方法并对服务响应进行编码。</li>
+<li>在客户端，客户端有一个称为存根的本地对象（对于某些语言，首选术语是客户端），它实现与服务相同的方法。 然后，客户端可以在本地对象上调用这些方法，将调用的参数包装在适当的协议缓冲区消息类型中 -  gRPC在将请求发送到服务器并返回服务器的协议缓冲区响应之后查看。</li>
+</ul>
+<h2 id="同步-vs-异步"><a href="#同步-vs-异步" class="headerlink" title="同步 vs 异步"></a>同步 vs 异步</h2><p>在响应从服务器到达之前阻塞的同步RPC调用最接近RPC所期望的过程调用的抽象。 另一方面，网络本质上是异步的，在许多情况下，能够在不阻塞当前线程的情况下启动RPC非常有用。<br>大多数语言的gRPC接口都有同步和异步两种版本。 您可以在每种语言的教程和参考文档中找到更多信息（完整的参考文档即将推出）。</p>
+<h1 id="RPC生命周期"><a href="#RPC生命周期" class="headerlink" title="RPC生命周期"></a>RPC生命周期</h1><p>现在让我们仔细看看当gRPC客户端调用gRPC服务器方法时会发生什么。我们不会查看实现细节，您可以在我们特定语言的页面中找到有关这些内容的更多信息。</p>
+<h2 id="一元RPC"><a href="#一元RPC" class="headerlink" title="一元RPC"></a>一元RPC</h2><p>首先让我们看一下最简单的RPC类型，客户端发送单个请求并返回单个响应。</p>
+<p>客户端在存根/客户端对象上调用方法后，将通知服务器已使用客户端的此调用元数据，方法名称和指定的截止时间（如果适用）调用RPC。<br>然后，服务器可以立即发送回自己的初始元数据（必须在任何响应之前发送），或者等待客户端的请求消息 - 首先发生的是特定于应用程序的消息。<br>一旦服务器具有客户端的请求消息，它就会执行创建和填充其响应所需的任何工作。然后将响应与状态详细信息（状态代码和可选状态消息）以及可选的尾随元数据一起返回（如果成功）到客户端。<br>如果状态为OK，则客户端获取响应，从而完成客户端的调用。</p>
+<h2 id="服务器流RPC"><a href="#服务器流RPC" class="headerlink" title="服务器流RPC"></a>服务器流RPC</h2><p>服务器流RPC类似于我们的简单示例，除了服务器在获取客户端的请求消息后发回响应流。在发回所有响应之后，服务器的状态详细信息（状态代码和可选状态消息）和可选的尾随元数据将被发送回服务器端完成。一旦客户端拥有所有服务器的响应，客户端就会完成。</p>
+<h2 id="客户端流式RPC"><a href="#客户端流式RPC" class="headerlink" title="客户端流式RPC"></a>客户端流式RPC</h2><p>客户端流式RPC也类似于我们的简单示例，除了客户端向服务器发送请求流而不是单个请求。服务器发送回单个响应，通常但不一定在收到所有客户端请求后，以及其状态详细信息和可选的尾随元数据。</p>
+<h2 id="双向流式RPC"><a href="#双向流式RPC" class="headerlink" title="双向流式RPC"></a>双向流式RPC</h2><p>在双向流式RPC中，调用再次由调用方法的客户端和接收客户端元数据，方法名称和截止时间的服务器启动。服务器再次可以选择发回其初始元数据或等待客户端开始发送请求。</p>
+<p>接下来会发生什么取决于应用程序，因为客户端和服务器可以按任何顺序读写 - 流完全独立地运行。因此，例如，服务器可以等到它收到所有客户端的消息之后再写入其响应，或者服务器和客户端可以“乒乓”：服务器获取请求，然后发回响应，然后客户端发送另一个基于响应的请求，等等。</p>
+<h2 id="截止日期-超时"><a href="#截止日期-超时" class="headerlink" title="截止日期/超时"></a>截止日期/超时</h2><p>gRPC允许客户端指定在RPC以错误DEADLINE_EXCEEDED终止之前，他们愿意等待RPC完成的时间。在服务器端，服务器可以查询特定RPC是否已超时，或者剩余多少时间来完成RPC。</p>
+<p>指定截止日期或超时的方式因语言而异 - 例如，并非所有语言都有默认截止日期，某些语言API在截止日期（固定时间点）工作，某些语言API在超时方面工作（持续时间）。</p>
+<h2 id="RPC终止"><a href="#RPC终止" class="headerlink" title="RPC终止"></a>RPC终止</h2><p>在gRPC中，客户端和服务器都对呼叫的成功进行独立和本地的确定，并且它们的结论可能不匹配。这意味着，例如，您可以在服务器端成功完成RPC（“我已经发送了所有响应！”），但在客户端失败（“我的截止日期后响应已到达！”）。在客户端发送所有请求之前，服务器也可以决定完成。</p>
+<h2 id="取消RPC"><a href="#取消RPC" class="headerlink" title="取消RPC"></a>取消RPC</h2><p>客户端或服务器可以随时取消RPC。取消立即终止RPC，以便不再进行进一步的工作。它不是“撤消”：取消之前所做的更改将不会被回滚。</p>
+<h2 id="元数据"><a href="#元数据" class="headerlink" title="元数据"></a>元数据</h2><p>元数据是以键值对列表形式的特定RPC调用（例如身份验证详细信息）的信息，其中键是字符串，值通常是字符串（但可以是二进制数据）。元数据对gRPC本身是不透明的 - 它允许客户端提供与服务器调用相关的信息，反之亦然。</p>
+<p>对元数据的访问取决于语言。</p>
+<h2 id="通道"><a href="#通道" class="headerlink" title="通道"></a>通道</h2><p>gRPC通道提供与指定主机和端口上的gRPC服务器的连接，并在创建客户端存根（或某些语言中的“客户端”）时使用。客户端可以指定通道参数来修改gRPC的默认行为，例如打开和关闭消息压缩。通道具有状态，包括已连接和空闲。</p>
+<p>gRPC如何处理关闭渠道与语言有关。某些语言还允许查询通道状态。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/gRPC/" rel="tag"># gRPC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/17/grpc_whatgrpc/" rel="next" title="gRPC中文指南（一）-什么是gRPC？">
+                <i class="fa fa-chevron-left"></i> gRPC中文指南（一）-什么是gRPC？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概览"><span class="nav-number">1.</span> <span class="nav-text">概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义服务"><span class="nav-number">1.1.</span> <span class="nav-text">定义服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用API接口"><span class="nav-number">1.2.</span> <span class="nav-text">使用API接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步-vs-异步"><span class="nav-number">1.3.</span> <span class="nav-text">同步 vs 异步</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RPC生命周期"><span class="nav-number">2.</span> <span class="nav-text">RPC生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一元RPC"><span class="nav-number">2.1.</span> <span class="nav-text">一元RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器流RPC"><span class="nav-number">2.2.</span> <span class="nav-text">服务器流RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客户端流式RPC"><span class="nav-number">2.3.</span> <span class="nav-text">客户端流式RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双向流式RPC"><span class="nav-number">2.4.</span> <span class="nav-text">双向流式RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#截止日期-超时"><span class="nav-number">2.5.</span> <span class="nav-text">截止日期/超时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPC终止"><span class="nav-number">2.6.</span> <span class="nav-text">RPC终止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消RPC"><span class="nav-number">2.7.</span> <span class="nav-text">取消RPC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元数据"><span class="nav-number">2.8.</span> <span class="nav-text">元数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通道"><span class="nav-number">2.9.</span> <span class="nav-text">通道</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+  <span class="">Email: gtydoit@gmail.com|</span>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
