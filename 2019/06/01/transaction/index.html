@@ -96,18 +96,20 @@
 
 
 
-<meta name="description" content="当说起比特币，很多人大多是认为只是简单的类似商品的虚拟产品，但是随着深入的了解会发现区块链这项技术：是未来，解决信任问题成本最低、跨区域交易成本最低、最完全的实现平等的技术，有人说中本聪（比特币的创始人）是未来穿越过来的，这并不是夸张，也许现在谈起区块链的种种前景，就如同80年代有人告诉你：“互联网时代就要来了，一个搜索信息的网站（google）可以在纳斯达克上市并且可以拥有7000亿美金（201">
+<meta name="description" content="UTXO模型的交易具有很多特点，本文主要针对一些关键的技术点进行分析。 数据结构交易的核心数据结构如下：-transaction hash-vin–outpoint—-previous hash—-index–script sig-vout–value–script pubkey 每次交易需要找到vin ，也就是对应上一笔交易产生的vout，通过previous hash 和index 可以很容易">
 <meta name="keywords" content="区块链">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈比特币">
-<meta property="og:url" content="http://www.gtygo.com/2019/01/12/浅谈比特币/index.html">
+<meta property="og:title" content="UTXO模型下的交易处理">
+<meta property="og:url" content="http://www.gtygo.com/2019/06/01/transaction/index.html">
 <meta property="og:site_name" content="gtygo">
-<meta property="og:description" content="当说起比特币，很多人大多是认为只是简单的类似商品的虚拟产品，但是随着深入的了解会发现区块链这项技术：是未来，解决信任问题成本最低、跨区域交易成本最低、最完全的实现平等的技术，有人说中本聪（比特币的创始人）是未来穿越过来的，这并不是夸张，也许现在谈起区块链的种种前景，就如同80年代有人告诉你：“互联网时代就要来了，一个搜索信息的网站（google）可以在纳斯达克上市并且可以拥有7000亿美金（201">
+<meta property="og:description" content="UTXO模型的交易具有很多特点，本文主要针对一些关键的技术点进行分析。 数据结构交易的核心数据结构如下：-transaction hash-vin–outpoint—-previous hash—-index–script sig-vout–value–script pubkey 每次交易需要找到vin ，也就是对应上一笔交易产生的vout，通过previous hash 和index 可以很容易">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-22T05:04:37.124Z">
+<meta property="og:image" content="http://www.gtygo.com/2019/06/01/transaction/prcture/tx.png">
+<meta property="og:updated_time" content="2019-06-21T01:46:54.369Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈比特币">
-<meta name="twitter:description" content="当说起比特币，很多人大多是认为只是简单的类似商品的虚拟产品，但是随着深入的了解会发现区块链这项技术：是未来，解决信任问题成本最低、跨区域交易成本最低、最完全的实现平等的技术，有人说中本聪（比特币的创始人）是未来穿越过来的，这并不是夸张，也许现在谈起区块链的种种前景，就如同80年代有人告诉你：“互联网时代就要来了，一个搜索信息的网站（google）可以在纳斯达克上市并且可以拥有7000亿美金（201">
+<meta name="twitter:title" content="UTXO模型下的交易处理">
+<meta name="twitter:description" content="UTXO模型的交易具有很多特点，本文主要针对一些关键的技术点进行分析。 数据结构交易的核心数据结构如下：-transaction hash-vin–outpoint—-previous hash—-index–script sig-vout–value–script pubkey 每次交易需要找到vin ，也就是对应上一笔交易产生的vout，通过previous hash 和index 可以很容易">
+<meta name="twitter:image" content="http://www.gtygo.com/2019/06/01/transaction/prcture/tx.png">
 
 
 
@@ -137,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://www.gtygo.com/2019/01/12/浅谈比特币/">
+  <link rel="canonical" href="http://www.gtygo.com/2019/06/01/transaction/">
 
 
 
 
 
-  <title>浅谈比特币 | gtygo</title>
+  <title>UTXO模型下的交易处理 | gtygo</title>
   
 
 
@@ -270,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/01/12/浅谈比特币/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2019/06/01/transaction/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="gtygo">
@@ -287,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈比特币</h1>
+          <h1 class="post-title" itemprop="name headline">UTXO模型下的交易处理</h1>
         
 
         <div class="post-meta">
@@ -299,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-12T19:11:16+08:00">
-                2019-01-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-01T18:19:16+08:00">
+                2019-06-01
               </time>
             
 
@@ -322,8 +324,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/个人感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">个人感悟</span>
+                  <a href="/categories/区块链技术解析/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链技术解析</span>
                   </a>
                 </span>
 
@@ -359,24 +361,17 @@
       
 
       
-        <p>当说起比特币，很多人大多是认为只是简单的类似商品的虚拟产品，但是随着深入的了解会发现区块链这项技术：是未来，解决信任问题成本最低、跨区域交易成本最低、最完全的实现平等的技术，有人说中本聪（比特币的创始人）是未来穿越过来的，这并不是夸张，也许现在谈起区块链的种种前景，就如同80年代有人告诉你：“互联网时代就要来了，一个搜索信息的网站（google）可以在纳斯达克上市并且可以拥有7000亿美金（2019年一月数据）的市值”一样的不可思议。</p>
-<h1 id="1-比特币是什么"><a href="#1-比特币是什么" class="headerlink" title="1.比特币是什么"></a>1.比特币是什么</h1><p>比特币（Bitcoin，缩写BTC）是一种总量恒定2100万的数字货币，和互联网一样具有去中心化、全球化、匿名性等特性。向地球另一端转账比特币，就像发送电子邮件一样简单，低成本，无任何限制。比特币因此被用于跨境贸易、支付、汇款等领域。<br>比特币始于2008年的一名叫做中本聪（Satoshi Nakamoto）的一篇论文。在诞生后的六年里，比特币作为一种前所未有的新型货币，经历了无数的市场考验和技术攻击，始终屹立不倒。现在比特币已成长为一个在全球有着数百万用户，数万商家接受付款，市值最高达百亿美元的货币系统。中本聪甚至获得诺贝尔经济学奖的提名。</p>
-<h1 id="2-如何工作"><a href="#2-如何工作" class="headerlink" title="2.如何工作"></a>2.如何工作</h1><p>区块链是什么？<br>程序员的角度来讲：区块链是一个分布式数据库，任何人都可以架设服务器，加入区块链网络，成为一个节点。区块链的世界里面，没有中心节点，每个节点都是平等的，都保存着整个数据库。你可以向任何一个节点，写入/读取数据，因为所有节点最后都会同步，保证区块链一致。<br>简单的理解：实际上是互联网上的去中心化账本。每一笔交易会通知互联网上的每一个人，从而保证了每个人对于交易信息的对称性（这对于解决信任至关重要）。所以我们常常称它是去中心化的，不如同于银行、支付宝的后台服务器等，每个用户都是一个独立的‘银行’。比特币的突破之处在于，<strong>第一次在数字世界创造了一种即不可复制，又不是中心化的东西。</strong></p>
-<h1 id="3-价值和意义"><a href="#3-价值和意义" class="headerlink" title="3.价值和意义"></a>3.价值和意义</h1><h2 id="意义"><a href="#意义" class="headerlink" title="意义"></a>意义</h2><p>比特币网络由全体比特币用户共同控制，任何人或组织都无法改变或停止比特币运行。<br>解决了人类社会中心化存在的问题：比如央行不需要经过大多数人的同意就可以印发大量人民币，财富就会贬值。而对于比特币而言，这种劣势将不复存在，比特币是一个完全脱离银行，只依靠互联网运行的货币系统，即使是政府执法部门，也无法查封或没收比特币；除非彻底关停互联网，否则也无法封杀比特币网络。在比特币系统里，你能真正掌握你的钱，而不是通过银行间接掌握你的钱，<strong>比特币在人类历史上第一次用技术手段保证了私有财产神圣不可侵犯。</strong></p>
-<h2 id="价值"><a href="#价值" class="headerlink" title="价值"></a>价值</h2><ol>
-<li>相对较低的跨国支付手续费：<br>信用卡跨国支付的商家手续费成本为3%-4%，而使用比特币支付的成本仅为0.5%~1%</li>
-<li><p>慈善募捐：<br><a href="https://www.8btc.com/article/117224" target="_blank" rel="noopener">美国富达慈善2016年获得700万美元比特币捐款，比特币成为重要慈善捐赠选项</a><br><a href="http://news.mydrivers.com/1/261/261129.htm" target="_blank" rel="noopener">比特币成为雅安震灾“救命钱”</a></p>
-</li>
-<li><p>智能合约：<br> 智能合约是一套以数字形式定义的承诺（promises），包括合约参与方可以在上面执行这些承诺的协议。智能合约就是传统合约的数字化版本。它们是在区块链数据库上运行的计算机程序，可以在满足其源代码中写入的条件时自行执行。智能合约一旦编写好就可以被用户信赖，合约条款不能被改变，因此合约是不可更改的。</p>
-</li>
+        <p>UTXO模型的交易具有很多特点，本文主要针对一些关键的技术点进行分析。</p>
+<h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><p>交易的核心数据结构如下：<br>-transaction hash<br>-vin<br>–outpoint<br>—-previous hash<br>—-index<br>–script sig<br>-vout<br>–value<br>–script pubkey<br> 每次交易需要找到vin ，也就是对应上一笔交易产生的vout，通过previous hash 和index 可以很容易的定位到前一笔交易的vout，但是，整个区块链系统不是线性执行，交易可以是从本地节点产生，也可以是通过p2p网络获取的，这时会出现一种情况就是当我收到交易时，在我本地找不到上一笔交易的vout，那么我们可以认为这是一个<strong>orphan transaction</strong>，稍后会对此进行说明。</p>
+<h1 id="经典的三部曲"><a href="#经典的三部曲" class="headerlink" title="经典的三部曲"></a>经典的三部曲</h1><p> 使用UTXO模型使用这下面的三个步骤来完成一个交易的处理，当然，这三个步骤只是对于用户/RPC层级可见的，步骤如下。</p>
+<ol>
+<li>create raw transaction 创建一个未签名的hex格式编码的交易序列</li>
+<li>sign raw transaction 对一个原始的交易序列进行签名（这一动作必须是在本地完成，不能在server端涉及到密钥的操作）</li>
+<li>send raw transaction 将一个签名的交易序列发送到<strong>transaction pool</strong> 等待矿工打包上链。</li>
 </ol>
-<h1 id="4-发行与挖矿"><a href="#4-发行与挖矿" class="headerlink" title="4.发行与挖矿"></a>4.发行与挖矿</h1><p>中本聪发明了区块链（Block chain）这一重要技术。节点借助区块（block）来同步交易，保证了所有节点数据的统一性，并通过竞争区块打包权（也就是挖矿）的方式，保证了区块链的唯一性。一段时间内的交易打成的一个包称为区块，比特币全网平均每10分钟产生一个区块，每一个区块都链接到上一个区块，依次相连形成区块链。节点打包交易只需要消耗很低成本的网络和计算资源，打包奖励的存在使得有大量节点想打包交易。为保证区块链的唯一性，比特币规则规定：节点使用计算机进行哈希运算的方法争夺交易打包权。检查运算结果从第一位开始是否有足够多连续的0，谁首先运算出符合规则的结果，谁就能获得这个区块的交易打包权，以及这个区块的打包奖励。<br>节点大量进行哈希计算需要计算机设备，并消耗大量电力，这个过程在本质上和金矿挖矿很相似（通过挖矿设备，消耗能源换取黄金）。比特币总量恒定，产量越来越少的产生方式也和黄金很相似。<br>因此人们形象地将比特币抢打包权的过程称为挖矿，将抢打包权的比特币节点称为矿工。</p>
-<h1 id="5-缺陷"><a href="#5-缺陷" class="headerlink" title="5.缺陷"></a>5.缺陷</h1><ol>
-<li>比特币并不稀缺，比特币的代码是开源的，任何人都能够修改代码，创造一个类似比特币的山寨币，但拷贝了比特币的代码并不等于复制了比特币。</li>
-<li>比特币不受法律的保护，匿名性使得经常会出现通过比特币的支付手段来进行的诈骗以及勒索。</li>
-<li>法币在和平年代下的价值是稳定的，但是比特币的价格是大幅波动的，非常不稳定，也许你手上拥有的比特币今天可以买一栋房子，而到了明天却只能买一个停车位。</li>
-<li>挖矿是一种非常消耗资源的事情，消耗了巨量的电力等资源，一直被环保人士所指责。</li>
-</ol>
+<p>上面我们可以看到交易的产生于使用，通过这三种方式将交易进行创建及处理。</p>
+<h1 id="相关细节"><a href="#相关细节" class="headerlink" title="相关细节"></a>相关细节</h1><p>交易处理的活动图如下所示：<br><img src="prcture/tx.png" alt="avator"></p>
+<h1 id="孤儿池"><a href="#孤儿池" class="headerlink" title="孤儿池"></a>孤儿池</h1><p>当找不到前一笔交易的vout时，将这个交易打入孤儿池，等待p2p网络接收到其上一笔交易。 这里的孤儿池主要是解决因网络延迟等原因不能够及时接受到交易的问题。</p>
 
       
     </div>
@@ -407,8 +402,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/10/蓝桥杯比赛总结/" rel="next" title="蓝桥杯初赛+决赛总结">
-                <i class="fa fa-chevron-left"></i> 蓝桥杯初赛+决赛总结
+              <a href="/2019/05/19/go_sync/" rel="next" title="Go源码阅读之sync包">
+                <i class="fa fa-chevron-left"></i> Go源码阅读之sync包
               </a>
             
           </div>
@@ -416,10 +411,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/24/1/" rel="prev" title="jvm运行时区域">
-                jvm运行时区域 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -551,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-比特币是什么"><span class="nav-number">1.</span> <span class="nav-text">1.比特币是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-如何工作"><span class="nav-number">2.</span> <span class="nav-text">2.如何工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-价值和意义"><span class="nav-number">3.</span> <span class="nav-text">3.价值和意义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#意义"><span class="nav-number">3.1.</span> <span class="nav-text">意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#价值"><span class="nav-number">3.2.</span> <span class="nav-text">价值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-发行与挖矿"><span class="nav-number">4.</span> <span class="nav-text">4.发行与挖矿</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-缺陷"><span class="nav-number">5.</span> <span class="nav-text">5.缺陷</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经典的三部曲"><span class="nav-number">2.</span> <span class="nav-text">经典的三部曲</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关细节"><span class="nav-number">3.</span> <span class="nav-text">相关细节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#孤儿池"><span class="nav-number">4.</span> <span class="nav-text">孤儿池</span></a></li></ol></div>
             
 
           </div>
