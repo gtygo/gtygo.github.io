@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Golang,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="基础 结构体类型，对外暴漏Lock 和 UnLock 两个方法 加锁 解锁 数据结构type Mutex struct { state int32     //互斥锁的状态 如是否被锁定 sema  uint32    //表示信号量，协程阻塞等待该信号量，解锁的协程释放信号量}   state为为32位整型 内部将其分为四分，用于记录mutex的四种状态  locked 是否易锁定 0 没有 1">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Golang Mutex的理解">
+<meta property="og:url" content="http://www.gtygo.com/2020/02/06/go_mutex/index.html">
+<meta property="og:site_name" content="gtygo">
+<meta property="og:description" content="基础 结构体类型，对外暴漏Lock 和 UnLock 两个方法 加锁 解锁 数据结构type Mutex struct { state int32     //互斥锁的状态 如是否被锁定 sema  uint32    //表示信号量，协程阻塞等待该信号量，解锁的协程释放信号量}   state为为32位整型 内部将其分为四分，用于记录mutex的四种状态  locked 是否易锁定 0 没有 1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-03-09T10:47:53.734Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Golang Mutex的理解">
+<meta name="twitter:description" content="基础 结构体类型，对外暴漏Lock 和 UnLock 两个方法 加锁 解锁 数据结构type Mutex struct { state int32     //互斥锁的状态 如是否被锁定 sema  uint32    //表示信号量，协程阻塞等待该信号量，解锁的协程释放信号量}   state为为32位整型 内部将其分为四分，用于记录mutex的四种状态  locked 是否易锁定 0 没有 1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.gtygo.com/2020/02/06/go_mutex/">
+
+
+
+
+
+  <title>Golang Mutex的理解 | gtygo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">gtygo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2020/02/06/go_mutex/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="gtygo">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="gtygo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Golang Mutex的理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-06T14:11:16+08:00">
+                2020-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/源码阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">源码阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><ul>
+<li>结构体类型，对外暴漏Lock 和 UnLock 两个方法 加锁 解锁</li>
+<li>数据结构<br>type Mutex struct {<br> state int32     //互斥锁的状态 如是否被锁定<br> sema  uint32    //表示信号量，协程阻塞等待该信号量，解锁的协程释放信号量<br>}</li>
+</ul>
+<ul>
+<li><p>state为为32位整型 内部将其分为四分，用于记录mutex的四种状态</p>
+<ul>
+<li>locked 是否易锁定 0 没有 1 有</li>
+<li>woken 是否有协程已被唤醒 0 没有协程唤醒 1 已有协程唤醒</li>
+<li>starving 该mutex是否处理饥饿状态 0没有 1 有</li>
+<li>waiter <strong><em>29bit</em></strong> 表示阻塞等待锁的协程个数 ，协程解锁时根据此值来判断是否需要释放信号量</li>
+</ul>
+</li>
+</ul>
+<p>协程之间抢锁 实际上是抢给locked赋值的权利 给locked置1 说明抢锁成功<br>抢不到的话就阻塞等待mutex.sema信号量 一旦持有锁的协程解锁，等待的协程会按顺序唤醒</p>
+<h2 id="加锁"><a href="#加锁" class="headerlink" title="加锁"></a>加锁</h2><p>若无其他协程干扰  </p>
+<ol>
+<li>判断locked是否为0</li>
+<li>置为1</li>
+</ol>
+<p>若加锁时，锁已被其他协程占用了，此时加锁过程如下：</p>
+<ul>
+<li>waiter计数器+1 </li>
+<li>协程B阻塞 直到Locked值变为0后才会被唤醒</li>
+</ul>
+<h2 id="解锁"><a href="#解锁" class="headerlink" title="解锁"></a>解锁</h2><p>若解锁时有1或多个协程正在阻塞</p>
+<ol>
+<li>将locked位置为0</li>
+<li>查看到 waiter &gt; 0 所以释放一个信号量，唤醒阻塞的协程，被唤醒的协程将locked置为1 于是协程B获得锁</li>
+</ol>
+<h2 id="自旋"><a href="#自旋" class="headerlink" title="自旋"></a>自旋</h2><p>加锁时，locked为1 说明该锁由其他协程持有，尝试加锁的协程并不是马上进入阻塞，而是持续的探测locked位是否变为0，此过程即自旋。<br>自旋时间很短 自旋时发现锁已经被释放，那么协程可以立即获取锁<br>好处：加锁失败不必立即转入阻塞 有机会获取到锁，可以避免协程的切换<br>本质：cpu的pause指令  30个时钟周期<br>连续探测locked是否为0<br>无限自旋会给cpu带来巨大压力，所以判断是否可以自旋非常重要：<br>自旋次数需要非常小，通常为4<br>cpu核心要大于1 否则没有意义<br>协程调度机制中的P数量要大于一  ，设置GOMAXPROCS 为1 不能启用自旋<br>协程调度机制中的可运行队列必须为空，否则会延迟协程调度<br>不忙的时候才会自旋</p>
+<p>优点：<br>充分利用cpu，尽量避免协程切换（因为当前申请加锁的协程拥有cpu，如果短时间的自旋可以获得锁，当前协程可以继续运行，不必进入阻塞态）</p>
+<p>自旋的问题：<br>自旋时获得锁，之前阻塞的协程无法获得，如果加锁的协程特别多，每次都通过自旋获得锁，那么之前被阻塞的进程很难获得锁，会进入饥饿状态<br>如何避免？<br>1.8版本增加了一个状态： Starving状态<br>此状态下不会自旋，一旦协程释放锁，一定会唤醒一个协程并成功加锁</p>
+<h2 id="mutex的模式"><a href="#mutex的模式" class="headerlink" title="mutex的模式"></a>mutex的模式</h2><ul>
+<li><p>normal模式<br>默认情况<br>协程加锁不成功不会立即转入阻塞队列，而是判断是否满足自旋条件</p>
+</li>
+<li><p>starvation模式<br>自旋可以抢到锁，说明同一时刻有协程释放了锁，我们知道释放锁时如果发现有阻塞等待的协程<br>会释放信号量来唤醒一个等待协程，被唤醒的协程得到cpu后开始运行，此时发现锁已经被抢占了，只好再阻塞，阻塞前会判断上次阻塞到本次阻塞经过多久，超过1ms 会将mutex标记为饥饿状态，再阻塞<br>饥饿模式下 不会启动自旋，一旦有协程释放锁，那么一定会唤醒协程，被唤醒的协程将会成功获取锁，同时也会把等待计数减1</p>
+</li>
+<li><p>Woken状态<br>用于加锁和解锁过程的通信<br>例子： 同一时刻，两个协程一个在加锁，一个在解锁，加锁的协程可能在自旋过程中，此时将woken置1 用于通知解锁协程不必释放信号量，（你只管解锁，不必释放信号量，我马上就拿到锁了）</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"># Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/01/transaction/" rel="next" title="UTXO模型下的交易处理">
+                <i class="fa fa-chevron-left"></i> UTXO模型下的交易处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/07/go_sync_value/" rel="prev" title="Golang Sync.Value源码理解">
+                Golang Sync.Value源码理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">gtygo</p>
+              <p class="site-description motion-element" itemprop="description">��һ��ʮ����ʮ�Ұ�</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加锁"><span class="nav-number">2.</span> <span class="nav-text">加锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解锁"><span class="nav-number">3.</span> <span class="nav-text">解锁</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自旋"><span class="nav-number">4.</span> <span class="nav-text">自旋</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mutex的模式"><span class="nav-number">5.</span> <span class="nav-text">mutex的模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gtygo</span>
+
+  
+</div>
+
+
+
+  <span class="">Email: gtydoit@gmail.com|</span>
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
