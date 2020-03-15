@@ -85,7 +85,7 @@
 
 
 
-  <meta name="keywords" content="数论,">
+  <meta name="keywords" content="搜索,">
 
 
 
@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="正整数k的倒数1/k，写为10进制的小数如果为无限循环小数，则存在一个循环节，求&amp;lt;=n的数中，倒数循环节长度最长的那个数，假如存在多个最优的答案，输出所有答案中最大的那个数。 1/6= 0.1(6) 循环节长度为11/7= 0.(142857) 循环节长度为61/9= 0.(1)  循环节长度为1输入输入n（10 &amp;lt;= n &amp;lt;= 1000)输出输出&amp;lt;=n的数中倒数循环节长度">
-<meta name="keywords" content="数论">
+<meta name="description" content="问题描述　　小明先把硬币摆成了一个 n 行 m 列的矩阵。 　　随后，小明对每一个硬币分别进行一次 Q 操作。 　　对第x行第y列的硬币进行 Q 操作的定义：将所有第 ix 行，第 jy 列的硬币进行翻转。 　　其中i和j为任意使操作可行的正整数，行号和列号都是从1开始。 　　当小明对所有硬币都进行了一次 Q 操作后，他发现了一个奇迹——所有硬币均为正面朝上。 　　小明想知道最开始有多少枚硬币是反">
+<meta name="keywords" content="搜索">
 <meta property="og:type" content="article">
-<meta property="og:title" content="51nod 1035 最长的循环节">
-<meta property="og:url" content="http://www.gtygo.com/2018/05/01/51nod 1035 最长的循环节/index.html">
+<meta property="og:title" content="矩阵翻硬币">
+<meta property="og:url" content="http://www.gtygo.com/2018/05/01/矩阵翻硬币/index.html">
 <meta property="og:site_name" content="gtygo">
-<meta property="og:description" content="正整数k的倒数1/k，写为10进制的小数如果为无限循环小数，则存在一个循环节，求&amp;lt;=n的数中，倒数循环节长度最长的那个数，假如存在多个最优的答案，输出所有答案中最大的那个数。 1/6= 0.1(6) 循环节长度为11/7= 0.(142857) 循环节长度为61/9= 0.(1)  循环节长度为1输入输入n（10 &amp;lt;= n &amp;lt;= 1000)输出输出&amp;lt;=n的数中倒数循环节长度">
+<meta property="og:description" content="问题描述　　小明先把硬币摆成了一个 n 行 m 列的矩阵。 　　随后，小明对每一个硬币分别进行一次 Q 操作。 　　对第x行第y列的硬币进行 Q 操作的定义：将所有第 ix 行，第 jy 列的硬币进行翻转。 　　其中i和j为任意使操作可行的正整数，行号和列号都是从1开始。 　　当小明对所有硬币都进行了一次 Q 操作后，他发现了一个奇迹——所有硬币均为正面朝上。 　　小明想知道最开始有多少枚硬币是反">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-17T02:55:08.754Z">
+<meta property="og:updated_time" content="2020-03-15T12:18:28.888Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="51nod 1035 最长的循环节">
-<meta name="twitter:description" content="正整数k的倒数1/k，写为10进制的小数如果为无限循环小数，则存在一个循环节，求&amp;lt;=n的数中，倒数循环节长度最长的那个数，假如存在多个最优的答案，输出所有答案中最大的那个数。 1/6= 0.1(6) 循环节长度为11/7= 0.(142857) 循环节长度为61/9= 0.(1)  循环节长度为1输入输入n（10 &amp;lt;= n &amp;lt;= 1000)输出输出&amp;lt;=n的数中倒数循环节长度">
+<meta name="twitter:title" content="矩阵翻硬币">
+<meta name="twitter:description" content="问题描述　　小明先把硬币摆成了一个 n 行 m 列的矩阵。 　　随后，小明对每一个硬币分别进行一次 Q 操作。 　　对第x行第y列的硬币进行 Q 操作的定义：将所有第 ix 行，第 jy 列的硬币进行翻转。 　　其中i和j为任意使操作可行的正整数，行号和列号都是从1开始。 　　当小明对所有硬币都进行了一次 Q 操作后，他发现了一个奇迹——所有硬币均为正面朝上。 　　小明想知道最开始有多少枚硬币是反">
 
 
 
@@ -137,13 +137,13 @@
 
 
 
-  <link rel="canonical" href="http://www.gtygo.com/2018/05/01/51nod 1035 最长的循环节/">
+  <link rel="canonical" href="http://www.gtygo.com/2018/05/01/矩阵翻硬币/">
 
 
 
 
 
-  <title>51nod 1035 最长的循环节 | gtygo</title>
+  <title>矩阵翻硬币 | gtygo</title>
   
 
 
@@ -270,7 +270,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2018/05/01/51nod 1035 最长的循环节/">
+    <link itemprop="mainEntityOfPage" href="http://www.gtygo.com/2018/05/01/矩阵翻硬币/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="gtygo">
@@ -287,7 +287,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">51nod 1035 最长的循环节</h1>
+          <h1 class="post-title" itemprop="name headline">矩阵翻硬币</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/51nod题解/" itemprop="url" rel="index">
-                    <span itemprop="name">51nod题解</span>
+                  <a href="/categories/蓝桥oj题解/" itemprop="url" rel="index">
+                    <span itemprop="name">蓝桥oj题解</span>
                   </a>
                 </span>
 
@@ -359,10 +359,14 @@
       
 
       
-        <p>正整数k的倒数1/k，写为10进制的小数如果为无限循环小数，则存在一个循环节，求&lt;=n的数中，倒数循环节长度最长的那个数，假如存在多个最优的答案，输出所有答案中最大的那个数。</p>
-<p>1/6= 0.1(6) 循环节长度为1<br>1/7= 0.(142857) 循环节长度为6<br>1/9= 0.(1)  循环节长度为1<br>输入<br>输入n（10 &lt;= n &lt;= 1000)<br>输出<br>输出&lt;=n的数中倒数循环节长度最长的那个数<br>输入样例<br>10<br>输出样例<br>7</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import java.io.BufferedReader;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line">import java.nio.Buffer;</span><br><span class="line">import java.util.*;</span><br><span class="line">//如果1&lt;=b&lt;a,a没有2或5的质因子，并且a与b互质，那么b/a 的循环节位数恰好等于min(10e≡1(moda)),e是正整数。</span><br><span class="line">//如果1&lt;=b&lt;a,a没有2或5的质因子，并且a与b互质，那么b/a 的循环节位数必整除?(a)</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	public static void main(String []args) &#123;</span><br><span class="line">		Scanner in=new Scanner(System.in) ;</span><br><span class="line">		int ans[]=new int[10005];</span><br><span class="line">		int n;</span><br><span class="line">		for(int i=1;i&lt;=1000;i++)&#123;</span><br><span class="line">			int flag=i;</span><br><span class="line">			if(flag%2==0)&#123;</span><br><span class="line">				flag/=2;</span><br><span class="line">			&#125;</span><br><span class="line">			if(flag%5==0)&#123;</span><br><span class="line">				flag/=5;</span><br><span class="line">			&#125;</span><br><span class="line">			n=1;</span><br><span class="line">			for(int j=1;j&lt;=flag;j++)&#123;</span><br><span class="line">				n*=10; n%=flag;</span><br><span class="line">				if(n==1)&#123;</span><br><span class="line">					ans[i]=j;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		n=in.nextInt();</span><br><span class="line">		int max=1;</span><br><span class="line">		for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">			if(ans[i]&gt;ans[max])&#123;</span><br><span class="line">				max=i;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(max);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <p>问题描述<br>　　小明先把硬币摆成了一个 n 行 m 列的矩阵。</p>
+<p>　　随后，小明对每一个硬币分别进行一次 Q 操作。</p>
+<p>　　对第x行第y列的硬币进行 Q 操作的定义：将所有第 i<em>x 行，第 j</em>y 列的硬币进行翻转。</p>
+<p>　　其中i和j为任意使操作可行的正整数，行号和列号都是从1开始。</p>
+<p>　　当小明对所有硬币都进行了一次 Q 操作后，他发现了一个奇迹——所有硬币均为正面朝上。</p>
+<p>　　小明想知道最开始有多少枚硬币是反面朝上的。于是，他向他的好朋友小M寻求帮助。</p>
+<p>　　聪明的小M告诉小明，只需要对所有硬币再进行一次Q操作，即可恢复到最开始的状态。然而小明很懒，不愿意照做。于是小明希望你给出他更好的方法。帮他计算出答案。<br>输入格式<br>　　输入数据包含一行，两个正整数 n m，含义见题目描述。<br>输出格式<br>　　输出一个正整数，表示最开始有多少枚硬币是反面朝上的。<br>样例输入<br>2 3<br>样例输出<br>1<br>数据规模和约定<br>　　对于10%的数据，n、m &lt;= 10^3；<br>　　对于20%的数据，n、m &lt;= 10^7；<br>　　对于40%的数据，n、m &lt;= 10^15；<br>　　对于10%的数据，n、m &lt;= 10^1000（10的1000次方）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import java.util.*;</span><br><span class="line">import java.io.*;</span><br><span class="line">import java.math.*;</span><br><span class="line"></span><br><span class="line">public class Main &#123;</span><br><span class="line">	</span><br><span class="line">	public static BigInteger getsqrt(BigInteger num)&#123;</span><br><span class="line">		String s=num.toString();</span><br><span class="line">		int mlen=s.length();</span><br><span class="line">		int len;</span><br><span class="line">		BigInteger besqrtnum=new BigInteger(s);</span><br><span class="line">		BigInteger sqrtofnum;</span><br><span class="line">		BigInteger sqrtofnummul;</span><br><span class="line">		String sString;</span><br><span class="line">		if(mlen%2==0) len=mlen/2;</span><br><span class="line">		else len=mlen/2+1;</span><br><span class="line">		char[] sArray=new char[len];</span><br><span class="line">		Arrays.fill(sArray, &apos;0&apos;);</span><br><span class="line">		for(int pos=0;pos&lt;len;pos++)&#123;</span><br><span class="line">			for(char ch=&apos;1&apos;;ch&lt;=&apos;9&apos;;ch++)&#123;</span><br><span class="line">				sArray[pos]=ch;</span><br><span class="line">				sString=String.valueOf(sArray);</span><br><span class="line">				sqrtofnum=new BigInteger(sString);</span><br><span class="line">				sqrtofnummul=sqrtofnum.multiply(sqrtofnum);</span><br><span class="line">				if(sqrtofnummul.compareTo(besqrtnum)==1)&#123;</span><br><span class="line">					sArray[pos]-=1;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return new BigInteger(String.valueOf(sArray));</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	public static void main(String []args)&#123;</span><br><span class="line">		Scanner in=new Scanner(System.in);</span><br><span class="line">		String n=in.next(); String m=in.next();</span><br><span class="line">		BigInteger nn=new BigInteger(n);</span><br><span class="line">		BigInteger mm=new BigInteger(m);</span><br><span class="line">		</span><br><span class="line">		System.out.println( getsqrt(nn).multiply(getsqrt(mm)));</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -379,7 +383,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数论/" rel="tag"># 数论</a>
+            <a href="/tags/搜索/" rel="tag"># 搜索</a>
           
         </div>
       
@@ -392,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/01/矩阵翻硬币/" rel="next" title="矩阵翻硬币">
-                <i class="fa fa-chevron-left"></i> 矩阵翻硬币
+              <a href="/2018/04/29/51nod 1649 齐头并进/" rel="next" title="51nod 1649 齐头并进">
+                <i class="fa fa-chevron-left"></i> 51nod 1649 齐头并进
               </a>
             
           </div>
@@ -402,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/05/01/51nod 1013 3的幂的和/" rel="prev" title="51nod 1013 3的幂的和">
-                51nod 1013 3的幂的和 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/01/51nod 1035 最长的循环节/" rel="prev" title="51nod 1035 最长的循环节">
+                51nod 1035 最长的循环节 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
